@@ -29,8 +29,8 @@ window.addEventListener("load", async function () {
     updateCartDisplay();
 })
 
-   // Load all plants
-
+  
+// Load all plants
 function loadPlants(url) {
     const plants = document.getElementById('plants').innerHTML = `<div></div>
                 <div class="text-center"><span class="animate-pulse loading loading-ring loading-xl"></span></div>
@@ -54,7 +54,7 @@ function loadPlants(url) {
                     </figure>
                     <div class="card-body py-0 pb-4 text-right">
                         <span class="card-title cursor-pointer" onclick="showDetails(${plant.id})">${plant.name}</span>
-                        <span class="text-justify line-clamp-2 text-sm">${plant.description}</span>
+                        <span class="text-justify line-clamp-2 text-[12.8px] text-[#1F2937]">${plant.description}</span>
                         <div class="flex justify-between">
                             <div class="rounded-3xl bg-green-200 px-3 py-1 text-green-800">${plant.category}</div>
                             <div class="font-bold">৳${plant.price}</div>

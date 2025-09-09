@@ -1,3 +1,4 @@
+// Show all category
 window.addEventListener("load", async function () {
     fetch('https://openapi.programming-hero.com/api/categories')
         .then(response => {
@@ -24,19 +25,16 @@ window.addEventListener("load", async function () {
             console.error('Error:', error);
         });
 
-    // get all plants
-    loadPlants('https://openapi.programming-hero.com/api/plants');
-
-    // load cart items
+     loadPlants('https://openapi.programming-hero.com/api/plants');
     updateCartDisplay();
 })
 
+   // Load all plants
+
 function loadPlants(url) {
-    // show loader
     const plants = document.getElementById('plants').innerHTML = `<div></div>
                 <div class="text-center"><span class="animate-pulse loading loading-ring loading-xl"></span></div>
                 <div></div>`;
-    // get all plants
     fetch(url)
         .then(response => {
             if (!response.ok) {
@@ -62,7 +60,7 @@ function loadPlants(url) {
                             <div class="font-bold">৳${plant.price}</div>
                         </div>
                         <div class="card-actions">
-                            <button class="btn bg-green-800 text-white rounded-3xl w-full" onclick="addToCart('${plant.name}','${plant.price}')"><i class="fa-solid fa-cart-plus"></i> Add to Cart</button>
+                            <button class="btn bg-green-700 text-white rounded-3xl w-full" onclick="addToCart('${plant.name}','${plant.price}')"><i class="fa-solid fa-cart-shopping"></i> Add to Cart</button>
                         </div>
                     </div>
                 </div>
@@ -75,6 +73,7 @@ function loadPlants(url) {
         });
 }
 
+// Show Cart on Display
 function updateCartDisplay() {
     const cart = getCartItems();
     if (cart.length === 0) {
@@ -103,8 +102,8 @@ function updateCartDisplay() {
     cartContainer.appendChild(totalElement);
 }
 
+// Show All Details
 function showDetails(plantId) {
-    // get plant details
     fetch('https://openapi.programming-hero.com/api/plant/' + plantId)
         .then(response => {
             if (!response.ok) {
@@ -130,11 +129,13 @@ function showDetails(plantId) {
         });
 }
 
+// load category
 function loadCategory(categoryId) {
     setActiveCategory(categoryId);
     loadPlants('https://openapi.programming-hero.com/api/category/' + categoryId);
 }
 
+// Add Cart
 function addToCart(name, price) {
     const cart = getCartItems();
     const existingItem = cart.find(item => item.name === name);
@@ -149,6 +150,7 @@ function addToCart(name, price) {
     updateCartDisplay();
 }
 
+// save cart
 function saveCartItems(cart) {
     localStorage.setItem("plantCart", JSON.stringify(cart));
 }
@@ -158,6 +160,7 @@ function getCartItems() {
     return cartData ? JSON.parse(cartData) : [];
 }
 
+// Remove items from cart
 function removeFromCart(name) {
     const cart = getCartItems();
     const updatedCart = cart.filter(item => item.name !== name);
@@ -166,6 +169,7 @@ function removeFromCart(name) {
     alert('Item removed from cart');
 }
 
+// Set category
 function setActiveCategory(categoryId) {
     if (!categoryId) {
         categoryId = '99';
